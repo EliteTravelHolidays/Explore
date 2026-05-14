@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+Elite Travels — React Frontend
+Official website frontend for Elite Travels, built in React and styled with Tailwind CSS. This repo contains the about.elitetravelholidays.com site — a marketing and enquiry platform that pulls content from a WordPress CMS backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🌐 Domain Structure
+URLPurposewww.elitetravelholidays.comMain booking site (vendor managed — do not touch)about.elitetravelholidays.comThis React site (our responsibility)cms.elitetravelholidays.comWordPress CMS backend (our responsibility)
 
-## Available Scripts
+🛠 Tech Stack
+LayerTechnologyFrameworkReact (Create React App)StylingTailwind CSS v3AnimationFramer MotionIconsLucide React + React IconsCarouselSwiper.jsRoutingReact Router DOMHTTPAxiosSEOReact Helmet AsyncNotificationsReact Hot Toast
 
-In the project directory, you can run:
+📁 Project Structure
+elite-travels/
+├── src/
+│   ├── assets/              # Logo and static images
+│   ├── components/
+│   │   ├── layout/          # Navbar, Footer, Layout wrapper
+│   │   ├── home/            # All home page sections
+│   │   ├── blog/            # Blog card and grid components
+│   │   ├── testimonials/    # Testimonial card and grid
+│   │   ├── about/           # Company story, team, why us
+│   │   └── common/          # Shared: forms, CTA, buttons, skeletons
+│   ├── pages/               # Route-level pages (Home, About, Blog, Testimonials)
+│   ├── utils/
+│   │   ├── api.js           # All WordPress REST API calls
+│   │   └── constants.js     # URLs, phone, email, WhatsApp link
+│   ├── App.jsx
+│   ├── index.css
+│   └── index.js
+└── public/
 
-### `npm start`
+⚙️ Local Setup
+Requirements: Node.js 18+, npm
+bash# Clone the repo
+git clone https://github.com/elitetravelholidays-ADMIN/Explore-.git
+cd Explore-
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Install dependencies
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Start development server
+npm start
+App runs at http://localhost:3000
 
-### `npm test`
+🔑 Key Constants (src/utils/constants.js)
+All URLs, phone numbers, and contact links live here. If any contact details change, update this file only — nowhere else.
+jsWP_BASE_URL  = "https://cms.elitetravelholidays.com"   // WordPress CMS
+SITE_URL     = "https://about.elitetravelholidays.com"  // This React site
+WHATSAPP_URL = "https://wa.me/919740004573"
+PHONE        = "+91 9740004573"
+EMAIL        = "support@elitetravelholidays.com"
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📡 WordPress CMS Integration
+React fetches all dynamic content (blogs, testimonials, enquiry submissions) from the WordPress REST API at cms.elitetravelholidays.com.
+DataEndpointBlog posts/wp-json/wp/v2/posts?_embedTestimonials/wp-json/wp/v2/testimonials?_embedACF fields/wp-json/acf/v3/testimonialsEnquiry form/wp-json/wpforms/v1/form/submit
 
-### `npm run build`
+Note: CMS is not yet live. API calls use mock/fallback data until WordPress is deployed.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🚀 Deployment
+Build for production:
+bashnpm run build
+This generates a build/ folder of static files. Upload the contents to Hostinger via File Manager or GitHub Actions FTP (auto-deploy is planned — see next steps).
+Required .htaccess on Hostinger (for React Router to work):
+apacheOptions -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+📋 Contributing Guidelines
+Branch naming
+feature/navbar-fix
+fix/blog-card-contrast
+chore/update-constants
+Commit messages
+feat: add WhatsApp floating button
+fix: hero text contrast on mobile
+chore: update phone number in constants
+Rules
 
-### `npm run eject`
+JSX only — no TypeScript
+Tailwind only — no inline styles unless Tailwind genuinely cannot handle it
+No <form> tags — use <div> with onClick handlers
+External links — always use window.open(url, '_blank', 'noopener,noreferrer')
+All images must have alt attributes
+Every component must have a default export
+Never leave a file half-complete — finish or revert
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Before pushing
+bashnpm run build   # Must complete with zero errors
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+🎨 Brand Guidelines
+TokenValueUsagePrimary Blue#0078D7Navbar, headings, linksSky Blue#38BDF8Accents, highlightsOrange#F97316CTA buttons onlyDark Navy#0A1F44Backgrounds, footerWhite#FFFFFFText on dark backgrounds
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Never use gray text on colored backgrounds. It fails contrast checks.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+📌 Current Status
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ React site built and running locally
+ All pages scaffolded (Home, About, Blog, Testimonials)
+ Tailwind + Framer Motion integrated
+ UI fixes in progress (navbar, blog cards, floating buttons, footer)
+ npm run build clean pass
+ GitHub Actions FTP auto-deploy setup
+ WordPress CMS deployed to subdomain
+ React connected to live WordPress API
+ Live on about.elitetravelholidays.com
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📞 Contact
+Email: support@elitetravelholidays.com
+Phone: +91 9740004573
+WhatsApp: Chat with us
