@@ -82,14 +82,14 @@ function Footer() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-full px-6 py-3 transition-all duration-300 hover:shadow-lg w-fit"
+              className="flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-semibold rounded-full px-6 py-3 transition-all duration-300 hover:shadow-lg w-64"
             >
               <FaWhatsapp className="text-xl" />
               Chat on WhatsApp
             </a>
             <a
               href="tel:+919740004573"
-              className="flex items-center gap-3 border border-white/30 hover:border-white text-white/80 hover:text-white font-medium rounded-full px-6 py-3 mt-3 transition-all duration-300 w-fit"
+              className="flex items-center justify-center gap-3 border border-white/30 hover:border-white text-white font-semibold rounded-full px-6 py-3 mt-3 transition-all duration-300 w-64"
             >
               <Phone className="w-4 h-4" />
               +91 9740004573
